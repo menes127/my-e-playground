@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean
+        class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">
+        <property name="portletModeMap">
+            <map>
+                <entry key="view" value-ref="viewController" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="viewController"
+        class="org.springframework.web.portlet.mvc.SimpleFormController">
+        <property name="commandClass"
+            value="com.family168.springsecuritybook.ch120.AddressBook" />
+        <property name="commandName" value="addressBook" />
+        <property name="formView" value="addressInput" />
+        <property name="successView" value="result" />
+    </bean>
+
+</beans>

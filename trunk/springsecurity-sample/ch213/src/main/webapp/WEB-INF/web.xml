@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>springsecurity</display-name>
+    <welcome-file-list>
+        <welcome-file>/home.jsp</welcome-file>
+    </welcome-file-list>
+
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+
+    <!-- JSF Config -->
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.jspx</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>
+            /WEB-INF/faces-config.xml,/WEB-INF/faces-managed-beans.xml,/WEB-INF/faces-navigation.xml
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.enabledLoadBundle11Compatibility</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.validateXml</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.verifyObjects</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <!-- Spring Config -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext.xml
+            /WEB-INF/applicationContext-security.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+
+    <!-- Filter Config -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <!-- Filter Mappings -->
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <!-- Core JSF Config -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.family168.springsecuritybook</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>x04</artifactId>
+  <packaging>war</packaging>
+  <name>x04 authorization handler</name>
+  <url>http://www.family168.com/</url>
+  <organization>
+    <name>family168</name>
+    <url>http://www.family168.com/</url>
+  </organization>
+  <repositories>
+    <repository>
+      <id>spring-milestone</id>
+      <name>Spring Portfolio Milestone Repository</name>
+      <url>http://s3.amazonaws.com/maven.springframework.org/milestone</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>3.0.0.M1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>3.0.0.M1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <defaultGoal>jetty:run</defaultGoal>
+  </build>
+</project>

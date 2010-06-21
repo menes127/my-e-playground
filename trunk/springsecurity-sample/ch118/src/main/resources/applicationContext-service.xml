@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/hello.service">serviceExporter</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="helloService" class="com.family168.springsecuritybook.ch118.HelloServiceImpl"/>
+
+    <bean id="serviceExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="helloService"/>
+        <property name="serviceInterface" value="com.family168.springsecuritybook.ch118.HelloService"/>
+    </bean>
+
+    <bean id="helloServiceProxy" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="httpInvokerRequestExecutor">
+            <bean
+            class="org.springframework.security.context.httpinvoker.AuthenticationSimpleHttpInvokerRequestExecutor"/>
+        </property>
+        <property name="serviceUrl" value="http://localhost:8080/ch118/hello.service"/>
+        <property name="serviceInterface" value="com.family168.springsecuritybook.ch118.HelloService"/>
+    </bean>
+</beans>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+    <http auto-config='true' session-fixation-protection="migrateSession">
+        <intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
+        <intercept-url pattern="/user.jsp" access="ROLE_USER" />
+        <intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER" />
+    </http>
+
+    <authentication-provider>
+        <user-service>
+            <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+            <user name="user" password="user" authorities="ROLE_USER" />
+        </user-service>
+    </authentication-provider>
+
+    <beans:bean id="switchUserProcessingFilter"
+            class="org.springframework.security.ui.switchuser.SwitchUserProcessingFilter">
+        <custom-filter position="SWITCH_USER_FILTER" />
+        <beans:property name="userDetailsService"
+            ref="org.springframework.security.userdetails.memory.InMemoryDaoImpl" />
+        <beans:property name="targetUrl" value="/index.jsp"/>
+    </beans:bean>
+</beans:beans>
