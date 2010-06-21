@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+    <http>
+        <intercept-url pattern="/admin.jsp" access="ROLE_ADMIN" />
+        <intercept-url pattern="/**" access="ROLE_USER" />
+        <form-login/>
+        <logout/>
+    </http>
+
+    <beans:bean id="jaasAuthenticationProvider"
+        class="org.springframework.security.providers.jaas.JaasAuthenticationProvider">
+        <custom-authentication-provider/>
+        <beans:property name="loginConfig" value="/WEB-INF/login.conf" />
+        <beans:property name="loginContextName" value="JAASTest" />
+        <beans:property name="callbackHandlers">
+            <beans:list>
+                <beans:bean class="org.springframework.security.providers.jaas.JaasNameCallbackHandler" />
+                <beans:bean class="org.springframework.security.providers.jaas.JaasPasswordCallbackHandler" />
+            </beans:list>
+        </beans:property>
+        <beans:property name="authorityGranters">
+            <beans:list>
+                <beans:bean class="com.family168.springsecuritybook.ch117.AuthorityGranterImpl" />
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+</beans:beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans
+    xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                        http://www.springframework.org/schema/security
+                         http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+    <global-method-security secured-annotations="enabled"/>
+
+    <http auto-config="true" access-denied-page="/accessDenied.jsp">
+
+        <intercept-url pattern="/faces/protected**" access="ROLE_ADMIN,ROLE_USER" />
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+        <form-login
+            login-processing-url="/j_spring_security_check"
+            login-page="/faces/login.jsf"
+            default-target-url="/"
+            authentication-failure-url="/faces/login.jsf" />
+        <logout
+            logout-url="/logout*"
+            logout-success-url="/" />
+
+    </http>
+
+    <authentication-provider>
+        <user-service>
+            <user name="admin" password="admin" authorities="ROLE_ADMIN,ROLE_USER" />
+            <user name="user" password="user" authorities="ROLE_USER" />
+        </user-service>
+    </authentication-provider>
+
+</beans:beans>

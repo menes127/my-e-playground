@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root
+    version="2.0"
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+    <jsp:directive.page
+        contentType="text/html;charset=ISO-8859-1"
+        pageEncoding="ISO-8859-1"
+        session="false" />
+    <jsp:output
+        doctype-public="-//W3C//DTD XHTML 1.1//EN"
+        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+        doctype-root-element="html"
+        omit-xml-declaration="false" />
+
+    <f:view>
+        <h:messages />
+        <h:form
+            id="loginForm"
+            prependId="false">
+            <label for="j_username"><h:outputText value="Username:" /><br />
+            </label>
+            <h:inputText
+                id="j_username"
+                required="true">
+            </h:inputText>
+
+            <br />
+            <br />
+            <label for="j_password"><h:outputText value="Password:" /><br />
+            </label>
+            <h:inputSecret
+                id="j_password"
+                required="true">
+            </h:inputSecret>
+
+            <br />
+            <br />
+            <label for="_spring_security_remember_me"> <h:outputText
+                value="Remember me" /> </label>
+            <h:selectBooleanCheckbox id="_spring_security_remember_me" />
+            <br />
+
+            <h:commandButton
+                type="submit"
+                id="login"
+                action="#{loginBean.doLogin}"
+                value="Login" />
+
+        </h:form>
+    </f:view>
+</jsp:root>

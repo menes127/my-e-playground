@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-2.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <bean id="expressionHandler"
+        class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <property name="permissionEvaluator" ref="permissionEvaluator"/>
+    </bean>
+
+    <bean id="permissionEvaluator" class="org.springframework.security.acls.AclPermissionEvaluator">
+        <constructor-arg ref="aclService"/>
+        <property name="sidRetrievalStrategy" ref="sidRoleHierarchyRetrievalStrategy" />
+    </bean>
+
+    <bean id="sidRoleHierarchyRetrievalStrategy"
+        class="org.springframework.security.acls.domain.SidRoleHierarchyRetrievalStrategyImpl">
+        <constructor-arg ref="roleHierarchy"/>
+    </bean>
+
+    <bean id="userDetailsServiceWrapper"
+        class="org.springframework.security.access.hierarchicalroles.UserDetailsServiceWrapper">
+        <property name="userDetailsService" ref="userDetailsService"/>
+        <property name="roleHierarchy" ref="roleHierarchy"/>
+    </bean>
+
+    <bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <property name="hierarchy" value="ROLE_ADMIN > ROLE_USER"/>
+    </bean>
+
+</beans>

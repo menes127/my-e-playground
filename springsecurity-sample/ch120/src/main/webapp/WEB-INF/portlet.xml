@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app
+    xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"
+    version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd
+    http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
+
+    <portlet>
+        <portlet-name>securityContextPortlet</portlet-name>
+        <portlet-class>
+            org.springframework.web.portlet.DispatcherPortlet
+        </portlet-class>
+        <init-param>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/securityContextPortlet.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>Spring Security Context Display Portlet</title>
+        </portlet-info>
+    </portlet>
+
+    <user-attribute>
+        <name>user.login.id</name>
+    </user-attribute>
+    <user-attribute>
+        <name>user.name</name>
+    </user-attribute>
+    <user-attribute>
+        <name>user.name.full</name>
+    </user-attribute>
+
+    <portlet>
+        <portlet-name>SpringTestPortlet1</portlet-name>
+        <display-name>SpringTestPortlet1</display-name>
+        <portlet-class>
+            org.springframework.web.portlet.DispatcherPortlet
+        </portlet-class>
+        <init-param>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/springtest-portlet1.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+            <portlet-mode>edit</portlet-mode>
+            <portlet-mode>help</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>SpringTestPortlet1</title>
+        </portlet-info>
+    </portlet>
+
+    <portlet>
+        <portlet-name>SpringTestPortlet2</portlet-name>
+        <display-name>SpringTestPortlet2</display-name>
+        <portlet-class>
+            org.springframework.web.portlet.DispatcherPortlet
+        </portlet-class>
+        <init-param>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/springtest-portlet2.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>SpringTestPortlet2</title>
+        </portlet-info>
+    </portlet>
+
+    <portlet>
+        <portlet-name>SpringTestPortlet3</portlet-name>
+        <display-name>SpringTestPortlet3</display-name>
+        <portlet-class>
+            org.springframework.web.portlet.DispatcherPortlet
+        </portlet-class>
+        <init-param>
+            <name>contextConfigLocation</name>
+            <value>/WEB-INF/springtest-portlet2.xml</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>SpringTestPortlet3</title>
+        </portlet-info>
+    </portlet>
+</portlet-app>

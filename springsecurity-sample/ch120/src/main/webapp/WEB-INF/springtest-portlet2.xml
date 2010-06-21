@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- the request scope bean -->
+    <bean id="requestTestBean" class="com.family168.springsecuritybook.ch120.TestBean"
+        scope="request" />
+
+    <!-- the session scope bean -->
+    <bean id="sessionTestBean" class="com.family168.springsecuritybook.ch120.TestBean"
+        scope="session" />
+
+    <!-- the global session scope bean -->
+    <bean id="globalSessionTestBean" class="com.family168.springsecuritybook.ch120.TestBean"
+        scope="globalSession" />
+
+    <bean
+        class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">
+        <property name="portletModeMap">
+            <map>
+                <entry key="view" value-ref="viewController" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="viewController" class="com.family168.springsecuritybook.ch120.TestScopeController" />
+</beans>

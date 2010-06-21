@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+    <bean id="helloService" class="com.family168.springsecuritybook.ch119.HelloServiceImpl">
+        <sec:intercept-methods>
+            <sec:protect access="ROLE_ADMIN" method="hello"/>
+        </sec:intercept-methods>
+    </bean>
+
+    <bean id="serviceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="helloService"/>
+        <property name="service" ref="helloService"/>
+        <property name="serviceInterface" value="com.family168.springsecuritybook.ch119.HelloService"/>
+        <property name="registryPort" value="1199"/>
+    </bean>
+
+    <bean id="helloServiceProxy" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="remoteInvocationFactory">
+            <bean class="org.springframework.security.context.rmi.ContextPropagatingRemoteInvocationFactory"/>
+        </property>
+        <property name="serviceUrl" value="rmi://localhost:1199/helloService"/>
+        <property name="serviceInterface" value="com.family168.springsecuritybook.ch119.HelloService"/>
+    </bean>
+
+</beans>
+
