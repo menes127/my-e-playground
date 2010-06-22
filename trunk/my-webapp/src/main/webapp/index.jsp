@@ -1,5 +1,2 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<jsp:forward page="/WEB-INF/content/jsp/default-module/welcome.jsp"></jsp:forward>
