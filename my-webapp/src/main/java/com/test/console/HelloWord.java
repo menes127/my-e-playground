@@ -1,4 +1,4 @@
-package test;
+package com.test.console;
 
 public class HelloWord {
 
