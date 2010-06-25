@@ -1,28 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.menes.webapp</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>parent/pom.xml</relativePath>
+	</parent>
+	<groupId>com.menes.webapp</groupId>
+	<artifactId>springsecurity3-sample</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
 
-  <groupId>com.menes.webapp</groupId>
-  <artifactId>springsecurity3-sample</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+	<name>springsecurity3-sample</name>
+	<url>http://code.google.com/p/my-e-playground/</url>
 
-  <name>springsecurity3-sample</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <modules>
-  	<module>ch001</module>
+	<modules>
+		<module>ch001</module>
+    <module>ch002</module>
   </modules>
+	
+	
 </project>
