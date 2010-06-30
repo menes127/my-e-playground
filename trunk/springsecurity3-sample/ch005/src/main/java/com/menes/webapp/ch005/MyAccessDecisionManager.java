@@ -26,7 +26,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
 		if (configAttributes == null) {
 			return;
 		}
-		System.out.println(object.toString()); // object is a URL.
+		//System.out.println(object.toString()); // object is a URL.
 		Iterator<ConfigAttribute> ite = configAttributes.iterator();
 		while (ite.hasNext()) {
 			ConfigAttribute ca = ite.next();
