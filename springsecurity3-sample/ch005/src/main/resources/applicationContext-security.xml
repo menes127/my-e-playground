@@ -20,22 +20,13 @@
 		<b:property name="securityMetadataSource" ref="securityMetadataSource"/>
 	</b:bean>
 	
-	<!-- 认证管理器，实现用户认证的入口 -->
+	<!-- 认证管理器，实现用户认证的入口 
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="userDetailService">
 		</authentication-provider>
 	</authentication-manager>
 	<b:bean id="userDetailService" class="com.menes.webapp.ch005.MyUserDetailService" />
-	
-	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
-	<b:bean id="accessDecisionManager" class="com.menes.webapp.ch005.MyAccessDecisionManager" />
-	
-	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
-	<b:bean id="securityMetadataSource" class="com.menes.webapp.ch005.MyFilterSecurityMetadataSource" />
-
-
-	
-	<!-- gaomh
+	-->
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
@@ -51,20 +42,41 @@
                                             where u.username=?" />
 		</authentication-provider>
 	</authentication-manager>
-	 -->
 	
-	<!-- gaomh
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<b:bean id="accessDecisionManager" class="com.menes.webapp.ch005.MyAccessDecisionManager" />
+	
+	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
+	<b:bean id="securityMetadataSource" class="com.menes.webapp.ch005.MyFilterSecurityMetadataSource" >
+		<!-- 
+		<b:property name="rescRoleDao" ref="rescRoleDao"/>
+		 -->
+		<b:constructor-arg ref="rescRoleDao">
+		</b:constructor-arg>
+	</b:bean>
+	
+	<!-- 资源角色资源表 -->
+	<b:bean id="rescRoleDao" class="com.menes.webapp.ch005.RescRoleDaoImpl">
+		<b:property name="dataSource" ref="dataSource"/>
+		<b:property name="resourceQuery" value="
+							select re.res_string,r.name 
+								from role r
+								join resc_role rr
+									on r.id=rr.role_id
+								join resc re
+									on re.id=rr.resc_id
+							order by re.name"/>
+	</b:bean>
+	
+	<!-- 数据源 -->
 	<b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<b:property name="driverClassName" value="org.hsqldb.jdbcDriver"></b:property>
-	 -->
-		<!-- In-Process (Standalone) Mode
+		<!-- In-Process (Standalone) Mode 
 		<b:property name="url" value="jdbc:hsqldb:res:/hsqldb/test"></b:property>
 		-->
 		<!-- Server Modes (Hsqldb Server) -->
-	<!-- gaomh
 		<b:property name="url" value="jdbc:hsqldb:hsql://localhost:9100/test"></b:property>
 		<b:property name="username" value="sa"></b:property>
 		<b:property name="password" value=""></b:property>
 	</b:bean>
-	 -->
 </b:beans>
