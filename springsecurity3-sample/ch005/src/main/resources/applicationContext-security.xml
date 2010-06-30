@@ -5,29 +5,33 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
 	<http auto-config='true'>
+		<intercept-url pattern="/login.jsp" filters="none" />
+		<form-login login-page="/login.jsp"
+					authentication-failure-url="/login.jsp?error=true"
+					default-target-url="/" />
+		<logout logout-success-url="/index.jsp" />
 		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter"/>
 	</http>
 	
 	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性 -->
 	<b:bean id="myFilter" class="com.menes.webapp.ch005.MyFilterSecurityInterceptor">
 		<b:property name="authenticationManager" ref="authenticationManager"/>
-		<b:property name="accessDecisionManager" ref="myAccessDecisionManagerBean"/>
+		<b:property name="accessDecisionManager" ref="accessDecisionManager"/>
 		<b:property name="securityMetadataSource" ref="securityMetadataSource"/>
 	</b:bean>
 	
 	<!-- 认证管理器，实现用户认证的入口 -->
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="myUserDetailService">
+		<authentication-provider user-service-ref="userDetailService">
 		</authentication-provider>
 	</authentication-manager>
-	<b:bean id="myUserDetailService" class="com.menes.webapp.ch005.MyUserDetailService" />
+	<b:bean id="userDetailService" class="com.menes.webapp.ch005.MyUserDetailService" />
 	
 	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
-	<b:bean id="myAccessDecisionManagerBean" class="com.menes.webapp.ch005.MyAccessDecisionManager" />
-	
+	<b:bean id="accessDecisionManager" class="com.menes.webapp.ch005.MyAccessDecisionManager" />
 	
 	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
-	<b:bean id="securityMetadataSource" class="com.menes.webapp.ch005.MyInvocationSecurityMetadataSource" />
+	<b:bean id="securityMetadataSource" class="com.menes.webapp.ch005.MyFilterSecurityMetadataSource" />
 
 
 	
