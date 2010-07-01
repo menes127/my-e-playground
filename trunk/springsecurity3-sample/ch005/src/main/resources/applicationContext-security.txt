@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<http auto-config='true'>
+		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilterSecurityInterceptor"/>
+	</http>
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username,password,status as enabled
+                                       from user
+                                      where username=?"
+				authorities-by-username-query="select u.username,r.name as authority
+                                             from user u
+                                             join user_role ur
+                                               on u.id=ur.user_id
+                                             join role r
+                                               on r.id = ur.role_id
+                                            where u.username=?" />
+		</authentication-provider>
+	</authentication-manager>
+	
+	        <!-- 
+        class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" autowire="byType">
+         -->
+         
+    <b:bean id="myFilterSecurityInterceptor"
+         class="com.menes.webapp.ch005.AMyFilterSecurityInterceptor" autowire="byType">
+        <!-- 
+        <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref=""/>
+         -->
+        <b:property name="securityMetadataSource" ref="securityMetadataSource" />
+    </b:bean>
+	
+    <b:bean id="securityMetadataSource"
+        class="com.menes.webapp.ch005.JdbcFilterSecurityMetadataSource">
+        <b:property name="dataSource" ref="dataSource"/>
+        <b:property name="resourceQuery" value="
+            select re.res_string,r.name
+              from role r
+              join resc_role rr
+                on r.id=rr.role_id
+              join resc re
+                on re.id=rr.resc_id
+          order by re.priority
+        "/>
+    </b:bean>
+	
+	<b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<b:property name="driverClassName" value="org.hsqldb.jdbcDriver"></b:property>
+		<!-- In-Process (Standalone) Mode 
+		<b:property name="url" value="jdbc:hsqldb:res:/hsqldb/test"></b:property>
+		-->
+		<!-- Server Modes (Hsqldb Server) -->
+		<b:property name="url" value="jdbc:hsqldb:hsql://localhost:9100/test"></b:property>
+		<b:property name="username" value="sa"></b:property>
+		<b:property name="password" value=""></b:property>
+	</b:bean>
+</b:beans>
+
