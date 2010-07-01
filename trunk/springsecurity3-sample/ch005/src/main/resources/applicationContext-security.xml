@@ -65,11 +65,12 @@
 	<!-- 数据源 -->
 	<b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<b:property name="driverClassName" value="org.hsqldb.jdbcDriver"></b:property>
-		<!-- In-Process (Standalone) Mode 
+		<!-- In-Process (Standalone) Mode -->
 		<b:property name="url" value="jdbc:hsqldb:res:/hsqldb/test"></b:property>
-		-->
-		<!-- Server Modes (Hsqldb Server) -->
+		
+		<!-- Server Modes (Hsqldb Server) 
 		<b:property name="url" value="jdbc:hsqldb:hsql://localhost:9100/test"></b:property>
+		-->
 		<b:property name="username" value="sa"></b:property>
 		<b:property name="password" value=""></b:property>
 	</b:bean>
