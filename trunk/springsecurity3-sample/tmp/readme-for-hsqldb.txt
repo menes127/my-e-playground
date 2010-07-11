@@ -26,3 +26,6 @@ java -cp hsqldb-1.8.0.10.jar org.hsqldb.util.SqlTool
 // 例子ch002
 cd C:\Documents and Settings\gaomh\.m2\repository\org\hsqldb\hsqldb\1.8.0.10
 java -classpath hsqldb-1.8.0.10.jar org.hsqldb.Server -database.0 file:c:/hsqldb/springsecurity3-sample/ch002/test -dbname.0 test -port 9100
+
+cd  C:\Documents and Settings\Administrator\.m2\repository\org\hsqldb\hsqldb\1.8.0.10
+java -classpath hsqldb-1.8.0.10.jar org.hsqldb.Server -database.0 file:C:/hsqldb/springsecurity3-sample/ch006/test -dbname.0 test -port 9100
