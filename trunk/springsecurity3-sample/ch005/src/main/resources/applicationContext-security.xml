@@ -68,7 +68,7 @@
 		<!-- In-Process (Standalone) Mode -->
 		<b:property name="url" value="jdbc:hsqldb:res:/hsqldb/test"></b:property>
 		
-		<!-- Server Modes (Hsqldb Server) 
+		<!-- Server Model (Hsqldb Server) 
 		<b:property name="url" value="jdbc:hsqldb:hsql://localhost:9100/test"></b:property>
 		-->
 		<b:property name="username" value="sa"></b:property>
