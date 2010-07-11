@@ -17,11 +17,11 @@
 
 	<modules>
 		<module>ch001</module>
-    <module>ch002</module>
-    <module>ch003</module>
-    <module>ch004</module>
-    <module>ch005</module>
-  </modules>
-	
-	
+		<module>ch002</module>
+		<module>ch003</module>
+		<module>ch004</module>
+		<module>ch005</module>
+		<module>ch006</module>
+		<module>ch007</module>
+	</modules>
 </project>
